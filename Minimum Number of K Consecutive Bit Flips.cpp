@@ -18,6 +18,28 @@ public:
     }
 };
 
+//Code-2 S.C : O(n)
+class Solution {
+public:
+    int minKBitFlips(vector<int>& nums, int k) {
+        int ans=0,flip=0;
+        vector<bool>flipped(nums.size(),0);
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]==flip%2){
+                if((i+k)>nums.size())
+                    return -1;
+                flip++;
+                ans++;
+                flipped[i]=true;
+            }
+                
+            if(i+1>=k && flipped[i-k+1]==true)
+                flip--;
+        }
+        return ans;
+    }
+};
+
 /*
     You are given a binary array nums and an integer k.
     A k-bit flip is choosing a subarray of length k from nums and simultaneously changing every 0 in the subarray to 1, and every 1 in the subarray to 0.
